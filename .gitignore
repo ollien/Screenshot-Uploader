@@ -1,3 +1,4 @@
 serverConfig.txt
 clientConfig.txt
-
+.DS_Store
+*.pyc
