@@ -16,9 +16,16 @@ class Main():
             cherrypy.request.body.process()
             parts = cherrypy.request.params['file']
             outFile = open(os.path.join(location,cherrypy.request.params['name']),'w')
-            for part in parts:
-                outFile.write(part.fullvalue())
-            outFile.close()
-            print 'written!'
-cherrypy.server.socket_host = '0.0.0.0'
-cherrypy.quickstart(Main())
+            if parts != None:
+                for part in parts:
+                    outFile.write(part.fullvalue())
+                outFile.close()
+                print 'written!'
+            else:
+                raise ValueError
+
+application = cherrypy.tree.mount(Main(),'/')
+if __name__=='__main__':
+    cherrypy.server.socket_host='0.0.0.0'
+    cherrypy.engine.start()
+    cherrypy.engine.block()
