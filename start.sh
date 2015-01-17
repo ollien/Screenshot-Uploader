@@ -1,0 +1,1 @@
+fswatch --print0 -e '/\.' /Volumes/Backroom/ScreenshotsUp/ | xargs -0 -n1 ./client.py
