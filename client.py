@@ -24,7 +24,7 @@ password=keys['password']
 finalLocation=keys['finalLocation']
 urlPath = adjective+timeHash+".png"
 print "Uploading",path,"as",urlPath,"to",endpoint
-r = requests.post(endpoint,params={'name':urlPath},files={'file':open(path,'rb')})
+r = requests.post(endpoint,auth=(username,password),params={'name':urlPath},files={'file':open(path,'rb')})
 print r.status_code
 if r.status_code==200:
     print os.path.join(finalLocation,urlPath)
