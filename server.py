@@ -1,14 +1,12 @@
 import cherrypy
 import cgi
 from configReader import ConfigReader
+import os.path
 import tempfile
 
-class FileFieldStorage(cgi.FieldStorage):
-    def make_file(self,binary=None):
-        return tempfile.NamedTemporaryFile(delete=True)
-def noBodyProcess():
-    cherrypy.request.process_request_body = False
-    
+configReader = ConfigReader(name="serverConfig.txt")
+keys = configReader.getKeys()
+location = keys['location']
 class Main():
     @cherrypy.expose
     def index(self):
@@ -17,7 +15,7 @@ class Main():
     def upload(self,**kwargs):
             cherrypy.request.body.process()
             parts = cherrypy.request.params['file']
-            outFile = open('/home/ollien-data/screenshots/'+cherrypy.request.params['name'],'w')
+            outFile = open(os.path.join(location,cherrypy.request.params['name']),'w')
             for part in parts:
                 outFile.write(part.fullvalue())
             outFile.close()
