@@ -26,6 +26,7 @@ urlPath = adjective+timeHash+".png"
 print "Uploading",path,"as",urlPath,"to",endpoint
 r = requests.post(endpoint,auth=(username,password),params={'name':urlPath},files={'file':open(path,'rb')})
 print r.status_code
+print r.text
 if r.status_code==200:
 	print os.path.join(finalLocation,urlPath)
 	os.system("echo '"+os.path.join(finalLocation,urlPath)+"'|pbcopy")
