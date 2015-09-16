@@ -1,0 +1,5 @@
+#Example config
+endpoint=https://example.com/upload/
+finalLocation=https://example.com/screenshots/
+username=upload
+password=password
