@@ -1,9 +1,10 @@
 import cherrypy
 import cgi
-from configReader import ConfigReader
 import os.path
 import hashlib
+import random
 from time import time
+from configReader import ConfigReader
 
 configReader = ConfigReader(name = "serverConfig.txt")
 keys = configReader.getKeys()
@@ -18,14 +19,14 @@ class Main():
 		raise cherrypy.HTTPError(403)
 
 	@cherrypy.expose
-	def upload(self, **kwargs):
-			timeBytes = bytes(str(time()))
-			timeHash = hashlib.md5(timeBytes).hexDigest()[0:6]
+	def upload(self, *args, **kwargs):
+			timeBytes = bytes(str(time()), "utf-8")
+			timeHash = hashlib.md5(timeBytes).hexdigest()[0:6]
 			adjective = random.choice(adjectives)
 			name = adjective + timeHash + ".png"
 			cherrypy.request.body.process()
 			parts = cherrypy.request.params['file']
-			outFile = open(os.path.join(location, name),'w')
+			outFile = open(os.path.join(location, name), 'wb')
 			if parts != None:
 				for part in parts:
 					outFile.write(part.fullvalue())
