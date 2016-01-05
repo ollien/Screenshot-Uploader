@@ -8,7 +8,7 @@ from time import time
 configReader = ConfigReader(name = "serverConfig.txt")
 keys = configReader.getKeys()
 location = keys['location']
-adjectivesFile = open("adjectives.py", "r")
+adjectivesFile = open("adjectives.txt", "r")
 adjectives = [line.rstrip() for line in adjectivesFile]
 adjectivesFile.close()
 
