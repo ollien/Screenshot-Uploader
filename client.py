@@ -19,14 +19,14 @@ finalLocation = keys['finalLocation']
 
 print("Uploading to %s" % (endpoint))
 r = requests.post(endpoint, 
-	auth = (username, password), 
-	files = {'file': open(path, 'rb')})
+    auth = (username, password), 
+    files = {'file': open(path, 'rb')})
 
 print(r.status_code)
 
 if r.status_code == 200:
-	urlPath = os.path.join(finalLocation, r.text)
-	print(urlPath)
-	os.system("echo '%s'|pbcopy" % urlPath)
+    urlPath = os.path.join(finalLocation, r.text)
+    print(urlPath)
+    os.system("echo '%s'|pbcopy" % urlPath)
 else:
-	print(r.text)
+    print(r.text)
